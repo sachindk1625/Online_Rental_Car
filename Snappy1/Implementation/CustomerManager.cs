@@ -22,6 +22,33 @@ namespace Snappy1.Implementation
             }
             return listLocation;
         }
+
+
+        public IEnumerable<BookedCars> GetMyBooking(string username)
+        {
+            List<BookedCars> bookedCars = new List<BookedCars>();
+            IEnumerable<CarRental> myBooking = new List<CarRental>();
+            using (var entity = new online_resEntities())
+            {
+                myBooking = entity.CarRental.Where(c => c.Username == username).ToList();
+                foreach (var c in myBooking)
+                {
+                    var car = entity.Car.Where(a => a.CarId == c.CarId).FirstOrDefault();
+                    bookedCars.Add(new BookedCars()
+                    {
+                        BookingId = c.RentalId,
+                        BookingEndtDate = c.BookingEnddate,
+                        BookingStartDate = c.BookingStartdate,
+                        CarBrand = car.Brand,
+                        CarColor = car.Color,
+                        CarModel = car.Model,
+                        CategoryType = car.CategoryType,
+                        ProductionYear = car.ProductionYear
+                    });
+                }
+            }
+            return bookedCars;
+        }
         /// <summary>
         /// 
         /// </summary>

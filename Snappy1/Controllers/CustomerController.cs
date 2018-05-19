@@ -8,17 +8,22 @@ using Snappy1.Models;
 using System.Web;
 using Snappy1.Implementation;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Snappy1.Controllers
 { 
     [Authorize(Roles="Customer")]
     public class CustomerController : Controller
     {
+
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly CustomerManager _customerManager;
-        public CustomerController()
+        public CustomerController(UserManager<ApplicationUser> userManager)
         {
-            _customerManager =  new CustomerManager();
+            _userManager = userManager;
+            _customerManager = new CustomerManager();
         }
+        
         public ActionResult Index()
         {
             return View(new BookingModel() { AllLocations = _customerManager.GetLocation() });
@@ -67,5 +72,23 @@ namespace Snappy1.Controllers
 
         }
 
+        public IActionResult CancelBooking(int carRentID)
+        {
+            using (var _context = new online_resEntities())
+            {
+                var car = _context.CarRental.Where(c => c.RentalId == carRentID).FirstOrDefault();
+                _context.CarRental.Remove(car);
+                _context.SaveChanges();
+            }
+            return View();
+        }
+
+        public IActionResult MyBooking()
+        {
+            var username = _userManager.GetUserName(User);
+            var email = _userManager.Users.Where(u => u.UserName == username).Select(e => e.Email).FirstOrDefault();
+            var booking = _customerManager.GetMyBooking(email);
+            return View(booking);
+        }
     }
 }
