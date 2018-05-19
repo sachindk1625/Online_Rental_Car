@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BookedCars> 
+
+    @{ 
+        Layout = "_Customer_Layout";
+    }
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Booking Start Date</th>
+                <th>Booking End Date</th>
+                <th>Car Model</th>
+                <th>Car Brand</th>
+                <th>Production Year</th>
+                <th>Car Color</th>
+                <th>Category Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingEndtDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarBrand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductionYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarColor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryType)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("CancelBooking","Customer", new { carRentID = @item.BookingId })" class="btn btn-danger">Cancel booking</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
