@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UHCL Car Rentals</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"><!-- Font Awesome -->                                  <!-- Bootstrap style -->
+    <link rel="stylesheet" type="text/css" href="~/css/datepicker.css" />
+
+    <script src="~/Scripts/Customer/jquery-1.11.3.min.js"></script>
+    @*<script src="~/js/Customer/jquery-1.11.3.min.js"></script>*@
+    <script src="~/Scripts/Customer/popper.min.js"></script>
+    <script src="~/Scripts/Customer/moment.min.js"></script>
+    <script src="~/Scripts/Customer/bootstrap.min.js"></script>
+    <script src="~/Scripts/Customer/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/Customer/jquery.singlePageNav.min.js"></script>
+    <script src="~/Scripts/Customer/jquery.scrollTo.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Customer" asp-action="Index" class="navbar-brand"><img style="width:200px"src="~/images/Customer/uhcl_logo2.PNG" /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Customer" asp-action="Index">Home</a></li>    
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Customer" asp-action="MyBooking">My Booking</a></li>
+                </ul>
+               @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
+                    <h2 class="text-uppercase mb-4">Your <strong>Journey</strong> is our priority</h2>
+
+
+                </div>
+            </div>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; 2018 - UHCL</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/Customer/site.js" asp-append-version="true"></script>
+
+
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
