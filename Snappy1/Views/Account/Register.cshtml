@@ -1,0 +1,84 @@
+﻿@model RegisterViewModel
+@inject online_resEntities _context
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control"/>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="isManager">Want to create a manager account ?</label>
+                <input id="mycheckbox" type="checkbox" asp-for="isManager"/>
+            </div>
+            <div class="form-group">
+                <div id="mycheckboxdiv" style="display:none">
+                    <div class="form-group">
+                        <label asp-for="location">Select Store Location </label>
+                        <select asp-for="location" class="form-control">
+                            @{
+                                List<Location> available_location = (from l in _context.Location
+                                                                     where l.ManagerUsername==null
+                                                                     select l).ToList<Location>();
+                                foreach(var l in available_location)
+                                {
+                                    var lo = l.LocationName;
+                                    <option value=@l.LocationName>@lo</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Register</button>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('#mycheckbox').change(function () {
+        $('#mycheckboxdiv').toggle();
+    });
+</script>
+
+
+
+
+
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

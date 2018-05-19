@@ -1,0 +1,91 @@
+﻿@model Snappy1.Models.UserInfoModel
+
+@{
+    ViewBag.Title = "Confirm Booking";
+}
+<div style="margin-top:76px;">
+    <h2>Confirm Booking.Please enter your details</h2>
+    <hr />
+    @using (Html.BeginForm("ConfirmBooking", "Customer", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal col-md-6">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label asp-for="EmailId" class="control-label col-md-4" >Your Email</label>
+                @*@Html.Label("Your Email", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label col-md-4"> First Name</label>
+                @*@Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label col-md-4">Last Name</label>
+                @*@Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LicenseNumber" class="control-label col-md-4">License Number</label>
+                @*@Html.Label("License Number", htmlAttributes: new { @class = "control-label col-md-4" })*@
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.LicenseNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LicenseNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+        @Html.HiddenFor(model => model.CarAvailabiltyModel.AmountTotal)
+        @Html.HiddenFor(model => model.CarAvailabiltyModel.ImagePath)
+        @Html.HiddenFor(model => model.CarAvailabiltyModel.Name)
+        <div class="col-md-6">
+            <div class="car-box">
+                <div class="text-center">
+                    <h4><b><u>@Model.CarAvailabiltyModel.Name</u></b></h4>
+                </div>
+                <img src="~/images/Category/@Model.CarAvailabiltyModel.ImagePath" alt="My Image" width="30%" height="30%" style="margin-left:30%">
+                <div class="text-center" style="height:85px;">
+                    <bold>
+                        <hr /><h5><b>Total Price :</b></h5>
+                        <h3>$ @(Model.CarAvailabiltyModel.AmountTotal)</h3>
+
+                    </bold>
+
+                    <br /><br />
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row col-md-12">
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-success confirmBook">Confirm Booking</button>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.BookingModel.StartDate)
+        @Html.HiddenFor(model => model.BookingModel.EndDate)
+        @Html.HiddenFor(model => model.BookingModel.Location)
+    }
+    @*<div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+</div>

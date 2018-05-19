@@ -1,0 +1,17 @@
+﻿@model Snappy1.Models.Car
+
+@{
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<title>DELETE</title>
+
+<div>
+    <p> are you sure you want to delete this car Information???</p>
+       <form asp-action="Delete">
+        <input type="hidden" asp-for="CarId" />
+        <input type="submit" value="Delete"  asp-action="Index" class="btn btn-danger" /> |
+        <input type="submit"  class="btn btn-primary" value="Back" asp-action="Index"/>
+    </form>
+</div>
+

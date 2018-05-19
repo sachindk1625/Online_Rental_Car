@@ -1,0 +1,116 @@
+﻿@model Snappy1.Models.BookingModel
+
+
+
+<div>
+    <div class="form-group tm-form-group tm-form-group-pad tm-form-group-4">
+        <img src="~/images/Customer/car_rantal_image.png" alt="My Image" width="100%" height="350 px">
+    </div>
+    <marquee scrollamount="15" direction="up" behavior="alternate">
+        <marquee scrollamount="15" direction="right" behavior="alternate">
+            <img src="~/images/Customer/1.jpg" width="500px" height"500px" />
+            
+        </marquee>
+    </marquee>
+
+
+</div> <!-- form-row -->
+@using (Html.BeginForm("CheckAvailability", "Customer", FormMethod.Post))
+{
+    <div class="form-row tm-search-form-row">
+
+        <div class="form-group tm-form-group tm-form-group-pad tm-form-group-4 col-md-4">
+            <label for="inputCheckIn">Pick  up Date</label>
+            @Html.TextBoxFor(model => model.StartDate, new { @id = "inputCheckIn", @class = "form-control", @onkeydown = "javascript: return false;", @onpaste = "javascript: return false;", @placeholder = "Pickup date" })
+            @Html.ValidationMessageFor(model => model.StartDate)
+            
+        </div>
+        <div class="form-group tm-form-group tm-form-group-pad tm-form-group-4 col-md-4">
+            <label for="inputCheckOut">Drop  off Date</label>
+            @Html.TextBoxFor(model => model.EndDate, new { @id = "inputCheckOut", @class = "form-control", @onkeydown = "javascript: return false;", @onpaste = "javascript: return false;", @placeholder = "Drop Off date" })
+            @Html.ValidationMessageFor(model => model.EndDate)
+
+        </div>
+
+        <div class="form-group tm-form-group tm-form-group-pad tm-form-group-4 col-md-4">
+
+            <div class="form-group">
+                <label for="location">Select the location:</label>
+                @Html.DropDownListFor(model => model.Location, Model.AllLocations, "Select a Location", new { @class = "form-control", @style = "cursor:pointer;" })
+                @Html.ValidationMessageFor(model => model.Location)
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 mx-auto tm-about-text-wrap text-center">
+                <input type="submit" class="text-uppercase btn-primary-avl tm-btn" value="Check Availability" />
+
+            </div>
+        </div>
+    </div>
+    <br>
+}
+
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        // Change top navbar on scroll
+        $(window).on("scroll", function () {
+            if ($(window).scrollTop() > 100) {
+                $(".tm-top-bar").addClass("active");
+            } else {
+                $(".tm-top-bar").removeClass("active");
+            }
+        });
+
+        // Smooth scroll to search form
+        $('.tm-down-arrow-link').click(function () {
+            $.scrollTo('#tm-section-search', 300, { easing: 'linear' });
+        });
+
+        // Date Picker in Search form
+
+
+        $('#inputCheckIn').datetimepicker({
+            minDate: moment(),
+            format: 'DD/MM/YYYY HH:mm:ss'
+        });
+        $('#inputCheckOut').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            minDate: moment(),
+            format: 'DD/MM/YYYY HH:mm:ss',
+
+        });
+        $("#inputCheckIn").on("dp.change", function (e) {
+            $('#inputCheckOut').data("DateTimePicker").minDate(e.date);
+        });
+        $("#inputCheckOut").on("dp.change", function (e) {
+            $('#inputCheckIn').data("DateTimePicker").maxDate(e.date);
+        });
+
+        // Update nav links on scroll
+        $('#tm-top-bar').singlePageNav({
+            currentClass: 'active',
+            offset: 60
+        });
+
+        // Close navbar after clicked
+        $('.nav-link').click(function () {
+            $('#mainNav').removeClass('show');
+        });
+        // Google Map
+        $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+    });
+
+</script>
+

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Snappy1.Models.Car>
+@inject online_resEntities _context
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        .grid_card {
+            margin: 50px;
+            padding: 10px;
+            float: left;
+            display: inline-block;
+            border: 2px solid black;
+        }
+
+        .center {
+            margin: 25% auto;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Locations</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ var no = 0;}
+                @foreach (var l in _context.Location)
+                {
+                    no += 1;
+                    <tr>
+                        <td>@no</td>
+                        <td>@l.LocationName</td>
+                        <td><a asp-action="" class="btn btn-primary">Check available Cars</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <h3>Check my Car Inventory<input type="button" id="mycheckbox" class="btn btn-primary" value="Click here"/></h3>
+    </div>
+    <div id="id="mycheckboxdiv"">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+            {
+                    <div class="col-sm-3">
+                        <div class="card border-dark grid_card text-left" style="max-width:250px;height:300px">
+                            <div class="card-header" style="border: 1px solid black; padding:2px; margin: 1px;">
+                                @Html.DisplayFor(modelItem => item.Brand)
+                            </div>
+                            <div class="card-body text-dark text-center center">
+                                <h3 class="card-title" style="color:@Html.DisplayFor(modelItem => item.Color)">@Html.DisplayFor(modelItem => item.Model)</h3>
+                                @Html.DisplayFor(modelItem => item.ProductionYear)
+                                <br /><br />
+                                <a asp-controller="Home" asp-action="Details" asp-route-carId="@item.CarId" class="btn btn-primary">Details</a>
+                                <a asp-controller="Home" asp-action="Edit" asp-route-carId="@item.CarId" class="btn btn-default">Edit</a>
+                                <a asp-controller="Home" asp-action="Delete" asp-route-carId="@item.CarId" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+
+    <script type="text/javascript">
+    $('#mycheckbox').change(function () {
+        $('#mycheckboxdiv').toggle();
+    });
+    </script>
+    
+    
+</body>
+</html>

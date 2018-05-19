@@ -1,0 +1,60 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+.field-validation-error {
+    color:red;
+}
+.confirmBook {
+    margin-left: 40%;
+    width: 313px;
+    margin-top: 30px;
+    font-size:large;
+}
+.seperator-right {
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width:2px;
+    padding-right: 7px;
+}
+.seperator-left {
+   
+    padding-left: 7px;
+}
+.car-box {
+    border-color:lightgray ;
+    border-style: solid;
+    border-radius: 35px;
+    background-color: lightgoldenrodyellow;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}

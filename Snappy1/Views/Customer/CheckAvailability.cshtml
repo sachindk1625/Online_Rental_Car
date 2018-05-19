@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Snappy1.Models.CarAvailabiltyModel>
+
+
+<div style="margin-top:76px;">
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="car-box">
+                        <div class="text-center">
+                            <h4><b>@item.Name</b></h4>
+                        </div>
+                        <img src="~/images/Category/@item.ImagePath" alt="My Image" width="300" height="250px">
+                        <div class="text-center" style="height:160px;">
+                            <bold>
+                                <hr /><h5><b>Price</b></h5>
+                                <h3><span class="seperator-right">$ @(item.AmountPerDay)/day</span><span class="seperator-left">$ @(item.AmountTotal)-Total</span></h3>
+                                <hr />
+                            </bold>
+                            @Html.ActionLink("Select & Continue", "ConfirmBooking", "Customer", new { carModelName = item.Name, totalAmount = item.AmountTotal, imagePath = item.ImagePath,startDate=item.BookingModel.StartDate,endDate=item.BookingModel.EndDate,location=item.BookingModel.Location }, new { @class = "btn-primary", @style = "width:300px;font-size:large;border:grey;border-style:solid;" })
+
+                            <br /><br />
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h1 style="color:orangered;">We are so sorry.But we are completely full.Better luck next time !!</h1>
+        }
+    </div>
+</div>
+<br>
+

@@ -1,0 +1,50 @@
+﻿@model Snappy1.Models.ConfirmationModel
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<div style="margin-top:76px;">
+    <h2 style="color:forestgreen">Congratulations.Your booking is confirmed.Booking Number : <b>@Model.BookingNumber</b></h2>
+    <hr />
+
+    <div class="col-md-6">
+        <div class="row col-md-10">
+            <h3><b>Email</b>: @Model.UserModel.EmailId</h3>
+        </div>
+        <div class="row col-md-12">
+            <h3><b>Duration</b>: @Model.UserModel.BookingModel.StartDate.ToString("MMM ddd d HH:mm yyyy") <b>to</b> @Model.UserModel.BookingModel.EndDate.ToString("MMM ddd d HH:mm yyyy")</h3>
+        </div>
+        <div class="row col-md-10">
+            <h3><b>Location</b>: @Model.UserModel.BookingModel.Location</h3>
+        </div>
+
+
+    </div>
+    <div class="col-md-6">
+        <div class="car-box">
+            <div class="text-center">
+                <h4><b>@Model.UserModel.CarAvailabiltyModel.Name</b></h4>
+            </div>
+            <img src="~/images/Category/@Model.UserModel.CarAvailabiltyModel.ImagePath" alt="My Image" width="30%" height="30%" style="margin-left:30%">
+            <div class="text-center" style="height:85px;">
+                <bold>
+                    <hr /><h5><b>Total Price :</b></h5>
+                    <h3>$ @(Model.UserModel.CarAvailabiltyModel.AmountTotal)</h3>
+
+                </bold>
+
+                <br /><br />
+
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row col-md-12">
+        <div class="form-group">
+            @Html.ActionLink("Start Over", "Index", "Customer", new { @class = "btn btn-success confirmBook" })
+
+        </div>
+    </div>
+
+</div>
+
